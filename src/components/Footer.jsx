@@ -1,5 +1,6 @@
 import React from 'react'
 const Footer = () => {
+    return null
     return (
         <footer className="footer footer-horizontal footer-center bg-base-content text-base-200 rounded p-10 fixed bottom-0">
             <nav className="grid grid-flow-col gap-4">
