@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../reducers/userSlice'
@@ -9,8 +9,11 @@ const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [emailId, setEmailId] = React.useState("pragya@gmail.com")
-    const [password, setPassword] = React.useState("Pragya@123")
+    const [emailId, setEmailId] = useState("pragya@gmail.com")
+    const [password, setPassword] = useState("Pragya@123")
+    const [error, setError] = useState('')
+
+
     const handleSubmit = async () => {
         try {
             let res = await axios.post(
@@ -22,12 +25,11 @@ const Login = () => {
             )
             console.log("Login Response:", res.data.data);
             dispatch(addUser(res.data.data))
-           // alert("Login Successful");
             // redirect to feed page
             navigate('/')
         } catch (err) {
-            console.error(err);
-            alert("Login Failed");
+            const errorMessage = err?.response?.data?.message || "Something went wrong"
+            setError(errorMessage)
         }
     }
     return (
@@ -53,6 +55,7 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
+                    <p className='text-red-500'>{error}</p>
                     <div className="card-actions justify-center">
                         <button className="btn btn-primary" onClick={handleSubmit}>Login</button>
                     </div>
