@@ -23,7 +23,6 @@ const Login = () => {
                     password
                 }, { withCredentials: true }
             )
-            console.log("Login Response:", res.data.data);
             dispatch(addUser(res.data.data))
             // redirect to feed page
             navigate('/')
