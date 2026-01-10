@@ -2,7 +2,7 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { BASE_URL } from "../utils/constant"
 import { useDispatch, useSelector } from "react-redux"
-import { addFeed, removeFeed } from "../reducers/feedSlice"
+import { addFeed, removeUserFromFeed } from "../reducers/feedSlice"
 import FeedCard from "./FeedCard"
 const Feed = () => {
 
@@ -23,7 +23,7 @@ const Feed = () => {
 
         } catch (err) {
             console.log(err)
-            dispatch(removeFeed())
+            dispatch(removeUserFromFeed())
         }
     }
 
@@ -33,6 +33,10 @@ const Feed = () => {
 
 
     }, [])
+
+    if(feeds.length <= 0){
+        return <div className=" flex justify-center my-10">No More Users Found!!</div>
+    }
 
 
    return (

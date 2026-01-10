@@ -11,13 +11,7 @@ const Connections = () => {
 
     const requests = useSelector((store) => store.requests)
 
-    const [reviewedRequest, setReviewedRequest] = useState({
-        status: '', reviewed: false
-    })
-
     // const [data, setData] = useState([])
-
-
 
     const fetchRequests = async () => {
         const res = await axios.get(BASE_URL + "/user/requests/received", { withCredentials: true })
@@ -50,10 +44,6 @@ const Connections = () => {
             );
         }
     };
-
-
-
-
 
     return (
         <div className="text-center my-10">
