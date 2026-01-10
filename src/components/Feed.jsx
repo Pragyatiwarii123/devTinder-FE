@@ -8,7 +8,7 @@ const Feed = () => {
 
     const dispatch = useDispatch()
     const feeds = useSelector((store) => store.feed)
-    const [usersData, setUsersData] = useState([])
+   // const [usersData, setUsersData] = useState([])
 
     const fetchFeed = async () => {
         try {
@@ -16,7 +16,7 @@ const Feed = () => {
 
                 const res = await axios.get(BASE_URL + "/feed", { withCredentials: true })
 
-                setUsersData(res.data.data)
+                //setUsersData(res.data.data)
 
                 dispatch(addFeed(res?.data?.data || []))
             }
@@ -37,9 +37,9 @@ const Feed = () => {
 
    return (
     <div>
-        {usersData.length > 0 && (
+        {feeds.length > 0 && (
             <div className="flex justify-center my-15">
-                <FeedCard feeds={usersData[0]} />
+                <FeedCard feeds={feeds[0]} />
             </div>
         )}
     </div>
