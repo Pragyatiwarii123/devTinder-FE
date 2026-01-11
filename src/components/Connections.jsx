@@ -20,10 +20,10 @@ const Connections = () => {
     }
 
     useEffect(() => {
-        if (!connections || connections.length === 0) {
+        if (connections.length === 0) {
             fetchConnections()
         }
-    }, [connections])
+    }, [])
 
     if (connections.length <= 0) {
         return <h1 className="flex justify-center font-bold my-10 ">No Connection Found</h1>

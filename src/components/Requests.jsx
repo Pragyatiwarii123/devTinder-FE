@@ -22,10 +22,10 @@ const Connections = () => {
     }
 
     useEffect(() => {
-        if (!requests || requests.length === 0) {
+        if (requests.length === 0) {
             fetchRequests()
         }
-    }, [requests])
+    }, [])
 
 
     const handleReviewRequest = async (status, connectionId) => {

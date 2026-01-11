@@ -21,10 +21,10 @@ const Feed = () => {
 
     useEffect(() => {
         // If redux already has data, don't call API
-        if (!feeds || feeds.length === 0) {
+        if (feeds.length === 0) {
             fetchFeed();
         }
-    }, [feeds]);
+    }, []);
 
     if (feeds.length <= 0) {
         return <div className=" flex justify-center my-10">No More Users Found!!</div>
