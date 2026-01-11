@@ -10,24 +10,22 @@ const Connections = () => {
 
     const connections = useSelector((store) => store.connections)
 
-    // const [data, setData] = useState([])
-
-
-
     const fetchConnections = async () => {
-        const res = await axios.get(BASE_URL + "/user/connections", { withCredentials: true })
-        console.log(res.data.data, "ressssss")
-        //setData(res.data.data)
-        dispatch(addConnection(res.data.data))
+        try {
+            const res = await axios.get(BASE_URL + "/user/connections", { withCredentials: true })
+            dispatch(addConnection(res.data.data))
+        } catch (err) {
+            console.log(err?.response?.data?.error || 'Something went wrong')
+        }
     }
 
-    console.log(connections, "connnnnnn")
-
     useEffect(() => {
-        fetchConnections()
-    }, [])
+        if (!connections || connections.length === 0) {
+            fetchConnections()
+        }
+    }, [connections])
 
-    if(connections.length <=0){
+    if (connections.length <= 0) {
         return <h1 className="flex justify-center font-bold my-10 ">No Connection Found</h1>
     }
 

@@ -11,18 +11,21 @@ const Connections = () => {
 
     const requests = useSelector((store) => store.requests)
 
-    // const [data, setData] = useState([])
-
     const fetchRequests = async () => {
-        const res = await axios.get(BASE_URL + "/user/requests/received", { withCredentials: true })
-        console.log(res.data.data, "ressssss")
-        //setData(res.data.data)
-        dispatch(addRequests(res.data.data))
+        try {
+            const res = await axios.get(BASE_URL + "/user/requests/received", { withCredentials: true })
+            dispatch(addRequests(res.data.data))
+        } catch (err) {
+            console.log(err?.response?.data?.error || 'Something went wrong')
+        }
+
     }
 
     useEffect(() => {
-        fetchRequests()
-    }, [])
+        if (!requests || requests.length === 0) {
+            fetchRequests()
+        }
+    }, [requests])
 
 
     const handleReviewRequest = async (status, connectionId) => {
